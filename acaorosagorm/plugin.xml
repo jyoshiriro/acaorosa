@@ -1,0 +1,11 @@
+<plugin name='acaorosagorm' version='0.1' grailsVersion='2.3 &gt; *'>
+  <author>Your name</author>
+  <title>Acaorosagorm Plugin</title>
+  <description>Brief summary/description of the plugin.
+</description>
+  <documentation>http://grails.org/plugin/acaorosagorm</documentation>
+  <type>AcaorosagormGrailsPlugin</type>
+  <resources>
+    <resource>br.org.acaorosa.dominio.Deputado</resource>
+  </resources>
+</plugin>
