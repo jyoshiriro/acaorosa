@@ -53,6 +53,11 @@ grails.project.dependency.resolution = {
         // runtime 'mysql:mysql-connector-java:5.1.27'
         // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0-grails-2.3"
+		compile 'org.springframework.social:spring-social-core:1.1.0.RELEASE'
+		compile 'org.springframework.social:spring-social-facebook:1.1.1.RELEASE'
+		compile 'org.springframework.social:spring-social-twitter:1.1.0.RELEASE'
+		runtime 'org.robolectric:robolectric:2.1.1'
+		runtime 'org.imgscalr:imgscalr-lib:4.2'
     }
 
     plugins {
@@ -73,6 +78,11 @@ grails.project.dependency.resolution = {
 		compile ":quartz-monitor:1.0"
 		
 		compile ":mail:1.0.7"
+		
+		compile ':spring-security-core:1.2.7.3'
+		compile ":spring-security-facebook:0.15.4"
+		compile ":spring-security-twitter:0.6.2"
+		
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0.1"
         //runtime ":cached-resources:1.1"
