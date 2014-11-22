@@ -1,8 +1,5 @@
 /.settings
 /target
-/target-eclipse
+/test
 /.classpath
 /.project
-/grails-acaorosagorm-0.1.zip
-/grails-acaorosagorm-0.1.zip.sha1
-/test

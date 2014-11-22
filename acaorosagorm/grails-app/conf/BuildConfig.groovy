@@ -37,6 +37,12 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
         // runtime 'mysql:mysql-connector-java:5.1.27'
+		compile 'commons-fileupload:commons-fileupload:1.2.2'
+		compile 'org.springframework.social:spring-social-core:1.1.0.RELEASE'
+		compile 'org.springframework.social:spring-social-facebook:1.1.1.RELEASE'
+		compile 'org.springframework.social:spring-social-twitter:1.1.0.RELEASE'
+		runtime 'org.robolectric:robolectric:2.1.1'
+		runtime 'org.imgscalr:imgscalr-lib:4.2'
     }
 
     plugins {
@@ -45,5 +51,8 @@ grails.project.dependency.resolution = {
             export = true
         }
 		compile ":mongodb:3.0.1"
+		compile ':spring-security-core:1.2.7.3'
+		compile ":spring-security-facebook:0.15.4"
+		compile ":spring-security-twitter:0.6.2"
     }
 }

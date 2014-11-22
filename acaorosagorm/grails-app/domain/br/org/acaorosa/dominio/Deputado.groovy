@@ -1,17 +1,29 @@
 package br.org.acaorosa.dominio;
 
+import br.org.acaorosa.dominio.Partido;
+
 
 class Deputado {
 
 	String id
+	String ideCadastro
+	String matricula
 	String nome
+	String nomeParlamentar
+	String condicao
 	String apelido
 	String telefones
 	String email
+	String sexo
+	String uf
+	String siglaPartido
+	boolean ativo
 	String perfilCD
 	String perfilFacebook
 	String perfilTwitter
 	byte[] minifoto
+	
+	Partido partido
 	
 	static constraints = {
 		telefones unique:true
