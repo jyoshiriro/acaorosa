@@ -93,6 +93,8 @@ grails.project.dependency.resolution = {
         //compile ":handlebars-asset-pipeline:1.3.0.1"
 		compile ":mongodb:3.0.1"
 
-
+		compile ':spring-security-core:1.2.7.3'
+		compile ":spring-security-facebook:0.15"
+		compile ":spring-security-twitter:0.6.2"
     }
 }
