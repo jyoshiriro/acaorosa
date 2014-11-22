@@ -1,7 +1,4 @@
 /.settings
-/target
-/target-eclipse
-/test
+/wrapper
 /.classpath
 /.project
-/wrapper
