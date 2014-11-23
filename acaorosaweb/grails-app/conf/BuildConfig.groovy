@@ -6,6 +6,7 @@ grails.project.work.dir = "target/work"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 grails.plugin.location.'acaorosagorm' = "../acaorosagorm"
+grails.plugin.location.'acaorosausuarios' = "../acaorosausuarios"
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 grails.project.fork = [
@@ -31,7 +32,7 @@ grails.project.dependency.resolution = {
     }
     log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
-    legacyResolve true // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
+    legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
 
     repositories {
         inherits true // Whether to inherit repository definitions from plugins
@@ -45,56 +46,46 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+		mavenRepo "http://maven.springframework.org/release/"
+		mavenRepo "http://repo.spring.io/milestone/"
     }
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
-        // runtime 'mysql:mysql-connector-java:5.1.27'
-        // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
-        test "org.grails:grails-datastore-test-support:1.0-grails-2.3"
-		
-		//runtime 'org.mongodb:bson:2.12.4'
-		//compile 'org.grails:grails-datastore-gorm:3.1.0.RELEASE'
-		//compile 'org.grails:grails-datastore-core:3.1.0.RELEASE'
-		//test 'org.grails:grails-datastore-simple:3.1.0.RELEASE'
-		
-		// Drivers para acesso via Groovy/Java
-		//runtime "org.mongodb:mongo-java-driver:2.12.4"
-		//runtime 'com.gmongo:gmongo:1.3'
+        runtime 'mysql:mysql-connector-java:5.1.29'
+        // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
+        test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
+		compile 'commons-fileupload:commons-fileupload:1.2.2'
+		compile 'org.springframework.social:spring-social-core:1.1.0.RELEASE'
+		compile 'org.springframework.social:spring-social-facebook:1.1.1.RELEASE'
+		compile 'org.springframework.social:spring-social-twitter:1.1.0.RELEASE'
     }
 
     plugins {
         // plugins for the build system only
-        build ":tomcat:7.0.54"
+        build ":tomcat:7.0.55"
 
         // plugins for the compile step
-        compile ":scaffolding:2.0.3"
+        compile ":scaffolding:2.1.2"
         compile ':cache:1.1.7'
+        compile ":asset-pipeline:1.9.6"
 
-		//runtime ":acaorosagorm:0.1"
         // plugins needed at runtime but not for compilation
-       // runtime ":hibernate:3.6.10.16" // or ":hibernate4:4.3.5.4"
+        runtime ":hibernate4:4.3.5.5" // or ":hibernate:3.6.10.17"
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
-        runtime ":resources:1.2.8"
 		
-        // Uncomment these (or add new ones) to enable additional resources capabilities
-        //runtime ":zipped-resources:1.0.1"
-        //runtime ":cached-resources:1.1"
-        //runtime ":yui-minify-resources:0.1.5"
-
-        // An alternative to the default resources plugin is the asset-pipeline plugin
-        //compile ":asset-pipeline:1.6.1"
+		compile ":mongodb:3.0.1"
+		compile ":mail:1.0.7"
+		
+		compile ":spring-security-core:2.0-RC4"
+		compile ":spring-security-facebook:0.16.2"
+		compile ":spring-security-twitter:0.6.2"
 
         // Uncomment these to enable additional asset-pipeline capabilities
-        //compile ":sass-asset-pipeline:1.5.5"
-        //compile ":less-asset-pipeline:1.5.3"
-        //compile ":coffee-asset-pipeline:1.5.0"
-        //compile ":handlebars-asset-pipeline:1.3.0.1"
-		compile ":mongodb:3.0.1"
-
-		compile ':spring-security-core:1.2.7.3'
-		compile ":spring-security-facebook:0.15"
-		compile ":spring-security-twitter:0.6.2"
+        //compile ":sass-asset-pipeline:1.9.0"
+        //compile ":less-asset-pipeline:1.10.0"
+        //compile ":coffee-asset-pipeline:1.8.0"
+        //compile ":handlebars-asset-pipeline:1.3.0.3"
     }
 }
