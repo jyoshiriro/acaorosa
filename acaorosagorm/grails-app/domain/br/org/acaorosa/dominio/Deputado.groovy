@@ -4,7 +4,9 @@ import br.org.acaorosa.dominio.Partido;
 
 
 class Deputado {
-
+	
+	static mapWith = "mongo"
+	
 	String id
 	String ideCadastro
 	String matricula

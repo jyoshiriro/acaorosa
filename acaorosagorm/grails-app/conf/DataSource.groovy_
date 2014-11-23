@@ -1,0 +1,47 @@
+environments {
+	development {
+		grails {
+			mongo {
+				host = "localhost"
+				port = 27017
+				databaseName = "acaorosa"
+				//		username = "acaorosa"
+				//		password = "poioi"
+				options {
+					autoConnectRetry = true
+					connectTimeout = 1000
+				}
+			}
+		}
+	}
+	test {
+		grails {
+			mongo {
+				host = "localhostx"
+				port = 27017
+				databaseName = "acaorosa"
+				//		username = "acaorosa"
+				//		password = "poioi"
+				options {
+					autoConnectRetry = true
+					connectTimeout = 1000
+				}
+			}
+		}
+	}
+	production {
+		grails {
+			mongo {
+				host = "localhost"
+				port = 27017
+				databaseName = "acaorosa"
+				//		username = "acaorosa"
+				//		password = "poioi"
+				options {
+					autoConnectRetry = true
+					connectTimeout = 1000
+				}
+			}
+		}
+	}
+}

@@ -1,6 +1,7 @@
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
+grails.plugin.location.'acaorosausuarios' = "../acaorosausuarios"
 
 grails.project.fork = [
     // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
@@ -33,26 +34,31 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+		mavenRepo "http://maven.springframework.org/release/"
+		mavenRepo "http://repo.spring.io/milestone/"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-        // runtime 'mysql:mysql-connector-java:5.1.27'
+        //runtime 'mysql:mysql-connector-java:5.1.27'
+		compile "net.sf.ehcache:ehcache-core:2.4.8"
+		compile 'org.robolectric:robolectric:2.1.1'
+		compile 'org.imgscalr:imgscalr-lib:4.2'
 		compile 'commons-fileupload:commons-fileupload:1.2.2'
-		compile 'org.springframework.social:spring-social-core:1.1.0.RELEASE'
-		compile 'org.springframework.social:spring-social-facebook:1.1.1.RELEASE'
-		compile 'org.springframework.social:spring-social-twitter:1.1.0.RELEASE'
-		runtime 'org.robolectric:robolectric:2.1.1'
-		runtime 'org.imgscalr:imgscalr-lib:4.2'
+		compile 'commons-io:commons-io:2.4'
+//		compile 'org.springframework.social:spring-social-core:1.1.0.RELEASE'
+//		compile 'org.springframework.social:spring-social-facebook:1.1.1.RELEASE'
+//		compile 'org.springframework.social:spring-social-twitter:1.1.0.RELEASE'
     }
 
     plugins {
         build(":release:3.0.1",
               ":rest-client-builder:1.0.3") {
-            export = true
+            export = false
         }
 		compile ":mongodb:3.0.1"
-		compile ':spring-security-core:1.2.7.3'
-		compile ":spring-security-facebook:0.15.4"
-		compile ":spring-security-twitter:0.6.2"
+		compile ":rest-client-builder:1.0.3"
+//	    compile ":spring-security-core:2.0-RC4"
+//		compile ":spring-security-facebook:0.16.2"
+//		compile ":spring-security-twitter:0.6.2"
     }
 }
