@@ -8,7 +8,7 @@ grails.project.source.level = 1.6
 grails.server.port.http = 8888
 grails.plugin.location.'acaorosagorm' = "../acaorosagorm"
 grails.plugin.location.'acaorosausuarios' = "../acaorosausuarios"
-//grails.project.war.file = "target/${appName}-${appVersion}.war"
+grails.project.war.file = "target/${appName}.war"
 
 grails.project.fork = [
     // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
