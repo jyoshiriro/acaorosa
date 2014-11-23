@@ -1,1 +1,0 @@
-Olá, <b>${nomeDest}</b>!

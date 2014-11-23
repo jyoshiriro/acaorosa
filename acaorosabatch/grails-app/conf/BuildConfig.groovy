@@ -7,6 +7,7 @@ grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 grails.server.port.http = 8888
 grails.plugin.location.'acaorosagorm' = "../acaorosagorm"
+grails.plugin.location.'acaorosausuarios' = "../acaorosausuarios"
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 grails.project.fork = [
@@ -50,51 +51,36 @@ grails.project.dependency.resolution = {
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
-        // runtime 'mysql:mysql-connector-java:5.1.27'
-        // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
-        test "org.grails:grails-datastore-test-support:1.0-grails-2.3"
-		compile 'org.springframework.social:spring-social-core:1.1.0.RELEASE'
-		compile 'org.springframework.social:spring-social-facebook:1.1.1.RELEASE'
-		compile 'org.springframework.social:spring-social-twitter:1.1.0.RELEASE'
-		runtime 'org.robolectric:robolectric:2.1.1'
-		runtime 'org.imgscalr:imgscalr-lib:4.2'
+        runtime 'mysql:mysql-connector-java:5.1.29'
+        // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
+        test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
+		compile 'commons-fileupload:commons-fileupload:1.2.2'
     }
 
     plugins {
         // plugins for the build system only
-        build ":tomcat:7.0.54"
+        build ":tomcat:7.0.55"
 
         // plugins for the compile step
-        compile ":scaffolding:2.0.3"
+        compile ":scaffolding:2.1.2"
         compile ':cache:1.1.7'
+        compile ":asset-pipeline:1.9.6"
 
         // plugins needed at runtime but not for compilation
-        //runtime ":hibernate:3.6.10.16" // or ":hibernate4:4.3.5.4"
+        runtime ":hibernate4:4.3.5.5" // or ":hibernate:3.6.10.17"
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
-        runtime ":resources:1.2.8"
 		
+		compile ":mongodb:3.0.1"
 		compile ':quartz:1.0.2'
 		compile ":quartz-monitor:1.0"
 		
 		compile ":mail:1.0.7"
-		
-		compile ':spring-security-core:1.2.7.3'
-		compile ":spring-security-facebook:0.15.4"
-		compile ":spring-security-twitter:0.6.2"
-		
-        // Uncomment these (or add new ones) to enable additional resources capabilities
-        //runtime ":zipped-resources:1.0.1"
-        //runtime ":cached-resources:1.1"
-        //runtime ":yui-minify-resources:0.1.5"
-
-        // An alternative to the default resources plugin is the asset-pipeline plugin
-        //compile ":asset-pipeline:1.6.1"
 
         // Uncomment these to enable additional asset-pipeline capabilities
-        //compile ":sass-asset-pipeline:1.5.5"
-        //compile ":less-asset-pipeline:1.5.3"
-        //compile ":coffee-asset-pipeline:1.5.0"
-        //compile ":handlebars-asset-pipeline:1.3.0.1"
+        //compile ":sass-asset-pipeline:1.9.0"
+        //compile ":less-asset-pipeline:1.10.0"
+        //compile ":coffee-asset-pipeline:1.8.0"
+        //compile ":handlebars-asset-pipeline:1.3.0.3"
     }
 }
