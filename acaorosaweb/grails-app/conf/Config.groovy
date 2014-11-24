@@ -57,6 +57,16 @@ grails {
         // escapes all not-encoded output at final stage of outputting
         // filteringCodecForContentType.'text/html' = 'html'
     }
+	mail {
+		host = "smtp.gmail.com"
+		port = 465
+		username = "acaorosa"
+		password = "123acaorosa321"
+		props = ["mail.smtp.auth":"true",
+				 "mail.smtp.socketFactory.port":"465",
+				 "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+				 "mail.smtp.socketFactory.fallback":"false"]
+	  }
 }
 
 
@@ -115,3 +125,28 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'br.org.acaorosa.dominio.Usuario'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'br.org.acaorosa.dominio.UsuarioUser'
+grails.plugin.springsecurity.authority.className = 'br.org.acaorosa.dominio.User'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                              ['permitAll'],
+	'/index':                         ['permitAll'],
+	'/index.gsp':                     ['permitAll'],
+	'/index_':                        ['permitAll'],
+	'/usuario/**':					  ['permitAll'],
+	'/assets/**':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+	'/**/favicon.ico':                ['permitAll']
+]
+
+grails.plugin.springsecurity.facebook.domain.classname='br.org.acaorosa.dominio.FacebookUser'
+grails.plugin.springsecurity.facebook.appId='1500821580194465'
+grails.plugin.springsecurity.facebook.secret='196a6db9809b96cb2ab8a83fe380872a'
+
+grails.plugin.springsecurity.twitter.domain.classname='br.org.acaorosa.dominio.TwitterUser'
+grails.plugin.springsecurity.twitter.key='ieORzf7pbEQ3BoQ9LLQTdu1Qo'
+grails.plugin.springsecurity.twitter.consumerKey='ieORzf7pbEQ3BoQ9LLQTdu1Qo'
+grails.plugin.springsecurity.twitter.consumerSecret='SSAaEAXJn4aQ9uAzL5hzPfpVTkv5uD6JDsvFGoyOnWkbx5w3va'
