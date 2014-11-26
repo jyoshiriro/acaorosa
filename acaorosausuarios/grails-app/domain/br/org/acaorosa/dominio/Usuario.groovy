@@ -4,6 +4,7 @@ class Usuario {
 
 	transient springSecurityService
 
+	String nome
 	String username
 	String password
 	String email
@@ -24,6 +25,7 @@ class Usuario {
 	static transients = ['springSecurityService']
 
 	static constraints = {
+		nome nullable:true 
 		username blank: false, unique: true
 		password blank: false
 		email nullable:true, unique: true

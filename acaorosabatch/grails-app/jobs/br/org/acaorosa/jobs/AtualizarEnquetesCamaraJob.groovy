@@ -23,8 +23,8 @@ class AtualizarEnquetesCamaraJob {
 	def atualizarEnqueteCamaraService
 	
     static triggers = {
-//		cron name: "AtualizarEnquetesCamara", cronExpression: "0 0 1 * * ?"
-		simple repeatInterval: 20000l // execute job once in 5 seconds
+		cron name: "AtualizarEnquetesCamara", cronExpression: "0 0 1 * * ?"
+//		simple repeatInterval: 20000l // execute job once in 5 seconds
     }
 
 	def execute() {

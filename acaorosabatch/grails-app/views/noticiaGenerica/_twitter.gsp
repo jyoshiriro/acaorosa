@@ -1,0 +1,1 @@
+Proposição na Câmara dos Deputados: ${detalhes[0..75].encodeAsRaw()}... ${urlCurta.encodeAsRaw()}

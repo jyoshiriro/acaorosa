@@ -33,10 +33,7 @@ class Discurso {
 	Deputado deputado
 	String nomePartidoDeputadoAntigo // caso o deputado não esteja na base
 	
-	Boolean mensagemMontadaEmail = false
-	Boolean mensagemMontadaFacebook = false
-	Boolean mensagemMontadaTwitter = false
-	Boolean mensagemMontadaMobile = false
+	Boolean mensagemMontada = false
 	
 	static transients = ['urlDetalhes']
 	

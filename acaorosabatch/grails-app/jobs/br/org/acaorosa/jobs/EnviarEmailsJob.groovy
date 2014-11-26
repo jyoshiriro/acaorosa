@@ -23,7 +23,7 @@ class EnviarEmailsJob {
 	
     static triggers = {
 //      cron name: "EnviarEmails", cronExpression: "* 30 5 * * ?"
-	  simple repeatInterval: 20000l, startDelay:90000 // execute job once in 5 seconds
+	  simple repeatInterval: 20000l // execute job once in 5 seconds
     }
 	
     def mailService

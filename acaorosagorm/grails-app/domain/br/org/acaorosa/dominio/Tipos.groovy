@@ -30,6 +30,21 @@ class Tipos {
 	String autorCNJ
 	String autorCNJEmail
 	String autorCNJFacebook
+	String autorCNJTwitter
 	String autorCNJSite
 	String autorCNJTelefones
+	
+	String autorEBC
+	String autorEBCEmail
+	String autorEBCFacebook
+	String autorEBCTwitter
+	String autorEBCSite
+	String autorEBCTelefones
+	
+	String autorSTF
+	String autorSTFEmail
+	String autorSTFFacebook
+	String autorSTFTwitter
+	String autorSTFSite
+	String autorSTFTelefones
 }

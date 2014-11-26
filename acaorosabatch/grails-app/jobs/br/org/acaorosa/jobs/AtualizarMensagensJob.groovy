@@ -7,7 +7,7 @@ import br.org.acaorosa.services.atualizacoes.AtualizarMensagensService;
 class AtualizarMensagensJob {
 	
     static triggers = {
-      simple repeatInterval: 50000l, startDelay: 60000 // execute job once in 5 seconds
+      simple repeatInterval: 50000l // execute job once in 5 seconds
 	  //cron name: "AtualizarMensagens", cronExpression: "* 55 5 * * ?"
     }
 	

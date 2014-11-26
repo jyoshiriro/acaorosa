@@ -124,6 +124,9 @@ log4j.main = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+		   
+		   debug 'com.the6hours'
+		   debug 'SpringSecurityTwitterGrailsPlugin'
 }
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'br.org.acaorosa.dominio.Usuario'

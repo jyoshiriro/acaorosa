@@ -1,6 +1,11 @@
 package br.org.acaorosa.controllers
 
+import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.impl.FacebookTemplate
+
 import grails.gsp.PageRenderer;
+import br.org.acaorosa.dominio.FacebookUser;
+import br.org.acaorosa.dominio.TwitterUser;
 import br.org.acaorosa.dominio.Usuario;
 
 class UsuarioController {
@@ -12,10 +17,20 @@ class UsuarioController {
 	def mailService
 	PageRenderer groovyPageRenderer
 
-	def index() {}
+	def index() {
+		Usuario usuario = springSecurityService.currentUser
+		if (usuario) {
+			try {
+				FacebookUser.findByUser(usuario)?.atualizarNomeCompleto()
+				TwitterUser.findByUser(usuario)?.atualizarNomeCompleto()
+			} catch (Exception e) {
+				e.printStackTrace()
+			}
+		}
+	}
 	
 	def cadastrar() {
-		Usuario usuario = Usuario.findByUsernameAndEmail(params.nome,params.email)
+		Usuario usuario = Usuario.findByNomeAndEmail(params.nome,params.email)
 		if (usuario && usuario.enabled) {
 			// já existe e confirmado
 			flash.message="Você já está cadastrado conosco :)"
@@ -27,7 +42,7 @@ class UsuarioController {
 		}
 		usuario = new Usuario()
 		usuario.receberEmail=true
-		usuario.username = params.nome
+		usuario.nome = params.nome
 		usuario.email = params.email
 		usuario.password = "123"
 		usuario.enabled=false
@@ -100,5 +115,17 @@ class UsuarioController {
 		usuario.save()
 		flash.message="Foi enviado um email pra você. Acesse ele, verifique se não caiu no spam e confirme seu cancelamento. Muito obrigado."
 		redirect(uri:"/")
+	}
+	
+	def atualizarNomes() {
+		
+		FacebookUser uface = FacebookUser.first()
+		Facebook facebook = new FacebookTemplate(uface.accessToken)
+		def pf = facebook.userOperations().userProfile
+		def nomeCompleto = pf.firstName
+		if (pf.middleName) nomeCompleto+=" ${pf.middleName}"
+		if (pf.lastName) nomeCompleto+=" ${pf.lastName}"
+		
+		render nomeCompleto
 	}
 }

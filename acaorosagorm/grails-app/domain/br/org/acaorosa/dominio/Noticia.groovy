@@ -1,5 +1,9 @@
 package br.org.acaorosa.dominio
 
+import groovy.util.logging.Log4j;
+import br.org.acaorosa.util.URLUtil;
+
+@Log4j
 class Noticia {
 
 	static mapWith = "mongo"
@@ -18,6 +22,7 @@ class Noticia {
 	String tipo
 	
 	String titulo
+	String detalhes
 	
 	String conteudoEmail
 	String conteudoFacebook
@@ -36,11 +41,14 @@ class Noticia {
 	boolean processadaTwitter
 	boolean processadaMobile
 	
+	static transients = ['urlCurta']
+	
 	static constraints = {
 		url nullable:true 
 		urlAuxiliar nullable:true 
 		tipo nullable:true 
 		titulo nullable:true 
+		detalhes nullable:true 
 		conteudoEmail nullable:true 
 		conteudoTwitter nullable:true 
 		conteudoFacebook nullable:true 
@@ -64,6 +72,15 @@ class Noticia {
 			processadaTwitter = false
 			processadaFacebook = false
 			processadaMobile = false
+		}
+	}
+	
+	public String getUrlCurta() {
+		try {
+			URLUtil.getUrlCurta(url)
+		} catch (Exception e) {
+			log.error("Erro ao tentar gerar a URL curta: ${e.message}")
+			url
 		}
 	}
 	

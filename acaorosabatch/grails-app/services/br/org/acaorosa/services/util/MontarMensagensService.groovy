@@ -18,11 +18,13 @@ class MontarMensagensService {
 
 	String tipoConteudo
 
+	private Tipos itipos
+
 	public Tipos getTipos() {
-		if (!tipos) {
-			tipos = Tipos.first()
+		if (!itipos) {
+			itipos = Tipos.first()
 		}
-		tipos
+		itipos
 	}
 
 	public inserirDadosCamara(Noticia noticia) {
@@ -46,7 +48,7 @@ class MontarMensagensService {
 			noticia.autor=discurso.nomePartidoDeputadoAntigo
 		}
 	}
-	
+
 	public inserirDadosDeputado(Noticia noticia, Proposicao proposicao) {
 		if (proposicao?.autor) {
 			noticia.autor = proposicao.autor.nomePartidoCompleto
@@ -58,6 +60,42 @@ class MontarMensagensService {
 		} else {
 			noticia.autor=proposicao.nomeAutor
 		}
+	}
+
+	public inserirDadosCNJ(Noticia noticia) {
+		noticia.autor = tipos.autorCNJ
+		noticia.autorEmail = tipos.autorCNJEmail
+		noticia.autorFacebook = tipos.autorCNJFacebook
+		noticia.autorSite = tipos.autorCNJSite
+		noticia.autorTelefones = tipos.autorCNJTelefones
+		noticia.autorTwitter = tipos.autorCNJTwitter
+	}
+
+	public inserirDadosSenado(Noticia noticia) {
+		noticia.autor = tipos.autorSenado
+		noticia.autorEmail = tipos.autorSenadoEmail
+		noticia.autorFacebook = tipos.autorSenadoFacebook
+		noticia.autorSite = tipos.autorSenadoSite
+		noticia.autorTelefones = tipos.autorSenadoTelefones
+		noticia.autorTwitter = tipos.autorSenadoTwitter
+	}
+
+	public inserirDadosEBC(Noticia noticia) {
+		noticia.autor = tipos.autorEBC
+		noticia.autorEmail = tipos.autorEBCEmail
+		noticia.autorFacebook = tipos.autorEBCFacebook
+		noticia.autorSite = tipos.autorEBCSite
+		noticia.autorTelefones = tipos.autorEBCTelefones
+		noticia.autorTwitter = tipos.autorEBCTwitter
+	}
+
+	public inserirDadosSTF(Noticia noticia) {
+		noticia.autor = tipos.autorSTF
+		noticia.autorEmail = tipos.autorSTFEmail
+		noticia.autorFacebook = tipos.autorSTFFacebook
+		noticia.autorSite = tipos.autorSTFSite
+		noticia.autorTelefones = tipos.autorSTFTelefones
+		noticia.autorTwitter = tipos.autorSTFTwitter
 	}
 
 	/**
