@@ -7,22 +7,28 @@ class Usuario {
 	String username
 	String password
 	String email
+	
+	Long idTemp
+	Date datatoken
+	
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
 	
-	boolean receberEmail
-	boolean receberFacebook
-	boolean receberTwitter
-	boolean receberMobile
+	boolean receberEmail = false
+	boolean receberFacebook = false
+	boolean receberTwitter = false
+	boolean receberMobile = false
 
 	static transients = ['springSecurityService']
 
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
-		email nullable:true
+		email nullable:true, unique: true
+		datatoken nullable:true 
+		idTemp nullable:true 
 	}
 
 	static mapping = {
@@ -31,18 +37,14 @@ class Usuario {
 	}
 
 	Set<User> getAuthorities() {
+		try {
 		UsuarioUser.findAllByUsuario(this).collect { it.user }
+		} catch (e){
+		[]
+		}
 	}
 	
 	def beforeValidate() {
-		if (receberEmail==null)
-			receberEmail=false
-		if (receberFacebook==null)
-			receberFacebook=false
-		if (receberTwitter==null)
-			receberTwitter=false
-		if (receberMobile==null)
-			receberMobile=false
 	}
 
 	def beforeInsert() {

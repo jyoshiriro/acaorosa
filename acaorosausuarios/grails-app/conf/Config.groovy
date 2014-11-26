@@ -20,3 +20,29 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'br.org.acaorosa.dominio.Usuario'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'br.org.acaorosa.dominio.UsuarioUser'
+grails.plugin.springsecurity.authority.className = 'br.org.acaorosa.dominio.User'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                              ['permitAll'],
+	'/index':                         ['permitAll'],
+	'/index.gsp':                     ['permitAll'],
+	'/index_':                     ['permitAll'],
+	'/usuario/**':                     ['permitAll'],
+	'/assets/**':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+	'/**/favicon.ico':                ['permitAll']
+]
+
+grails.plugin.springsecurity.facebook.domain.classname='br.org.acaorosa.dominio.FacebookUser'
+grails.plugin.springsecurity.facebook.appId='1500821580194465'
+grails.plugin.springsecurity.facebook.secret='196a6db9809b96cb2ab8a83fe380872a'
+
+grails.plugin.springsecurity.twitter.domain.classname='br.org.acaorosa.dominio.TwitterUser'
+grails.plugin.springsecurity.twitter.key='ieORzf7pbEQ3BoQ9LLQTdu1Qo'
+grails.plugin.springsecurity.twitter.consumerKey='ieORzf7pbEQ3BoQ9LLQTdu1Qo'
+grails.plugin.springsecurity.twitter.consumerSecret='SSAaEAXJn4aQ9uAzL5hzPfpVTkv5uD6JDsvFGoyOnWkbx5w3va'
