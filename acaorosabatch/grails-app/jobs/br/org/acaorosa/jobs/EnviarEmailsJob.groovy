@@ -22,11 +22,12 @@ class EnviarEmailsJob extends AbstractJob {
 	*/
 	
     static triggers = {
-      //cron name: "EnviarEmails", cronExpression: "* * 17 * * ?"
-	  simple repeatInterval: 20000l // execute job once in 5 seconds
+      cron name: "EnviarEmails", cronExpression: "* 30 5 * * ?"
+	  //simple repeatInterval: 20000l // execute job once in 5 seconds
     }
 	
     def mailService
+	PageRenderer groovyPageRenderer
 	SessionFactory sessionFactory
 	
 	void init() {}
@@ -55,6 +56,8 @@ class EnviarEmailsJob extends AbstractJob {
 					e.printStackTrace()
 		        }
 			}
+			// se ao menos 1 for enviado, marque a mensagem como "processadaEmail"
+			// para não ser mais enviada no outro job
 			if (enviados) {
 				noticia.processadaEmail=true
 				noticia.save()

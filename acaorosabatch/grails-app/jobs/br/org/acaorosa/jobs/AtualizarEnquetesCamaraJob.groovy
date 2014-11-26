@@ -8,25 +8,30 @@ import javax.xml.xpath.XPathFactory;
 
 import br.org.acaorosa.dominio.Noticia;
 import br.org.acaorosa.dominio.PalavrasChave
+import br.org.acaorosa.dominio.Parametro;
 import br.org.acaorosa.dominio.Tipos;
+import br.org.acaorosa.services.util.MontarMensagensService;
+import br.org.acaorosa.util.PalavrasChaveUtil;
 
 import com.sun.org.apache.xml.internal.dtm.ref.DTMNodeList;
 
 @Log4j
 class AtualizarEnquetesCamaraJob extends AbstractJob {
+	
     static triggers = {
-		cron name: "AtualizarEnquetesCamara", cronExpression: "0 32 21 * * ?"
+		cron name: "AtualizarEnquetesCamara", cronExpression: "0 0 1 * * ?"
 		//simple repeatInterval: 20000l // execute job once in 5 seconds
     }
-	// TODO: preencher a partir do banco no "init()"
+
+	def montarMensagensService
+	
 	private String urlEnquentesCamara
 	private String urlPesquisaEnquete
 	
 	// TODO: preencher a partir do banco no "init()"
 	void init() {
-		tipoConteudo = "enquete"
-		urlEnquentesCamara = "http://www2.camara.leg.br/agencia-app/listaEnquete"
-		urlPesquisaEnquete = "http://www2.camara.leg.br/agencia-app/votarEnquete/enquete/"
+		urlEnquentesCamara = Parametro.findBySigla('url_enquete_camara').valor
+		urlPesquisaEnquete = Parametro.findBySigla('url_pesquisa_enquete_camara').valor
 	}
 	
 	def execute() {
@@ -64,7 +69,7 @@ class AtualizarEnquetesCamaraJob extends AbstractJob {
 		
 		Noticia noticia = new Noticia()
 		
-		noticia.tipo=tipos.tipoEnquete
+		noticia.tipo=tipos.tipoEnqueteCamara
 		noticia.url=urlEnquete
 		noticia.urlAuxiliar=urlNoticia
 		noticia.titulo=tituloNoticiaMaisRecente
@@ -77,7 +82,7 @@ class AtualizarEnquetesCamaraJob extends AbstractJob {
 		noticia.autorTelefones=tipos.autorCamaraTelefones
 		
 		noticia.dia = new Date()
-		preencherConteudos(noticia)
+		montarMensagensService.preencherConteudos("enqueteCamara", noticia)
 		
 		noticia.insert()
 		
@@ -94,7 +99,7 @@ class AtualizarEnquetesCamaraJob extends AbstractJob {
 	
 	private String getURLEnquete(String urlNoticia) {
 		String conteudoHTML = urlNoticia.toURL().text
-		if (!isNoticiaCandidata(conteudoHTML)) {
+		if (!PalavrasChaveUtil.isConteudoCandidato(conteudoHTML)) {
 			return null
 		}
 		String inicioUrl = urlPesquisaEnquete

@@ -15,6 +15,7 @@ package br.org.acaorosa.services.atualizacoes
 import br.org.acaorosa.dominio.Deputado;
 import br.org.acaorosa.dominio.Proposicao
 import br.org.acaorosa.dominio.TipoProposicao;
+import br.org.acaorosa.util.PalavrasChaveUtil;
 import groovy.util.logging.Log4j
 import groovy.util.slurpersupport.GPathResult
 
@@ -24,18 +25,18 @@ import groovy.util.slurpersupport.GPathResult
  * A exclusão ocorre quando a proposição chega como "arquivada"  
  */
 @Log4j
-class AtualizarProposicaoService extends AtualizadorEntidade {
+class AtualizarProposicaoCamaraService extends AtualizadorEntidade {
 
 	@Override
 	public String getSiglaDeParametro() {
-		// "http://www.camara.gov.br/SitCamaraWS/Proposicoes.asmx/ListarProposicoes?numero=&datApresentacaoIni=&datApresentacaoFim=&autor=&parteNomeAutor=&siglaPartidoAutor=&siglaUFAutor=&generoAutor=&codEstado=&codOrgaoEstado=&emTramitacao=&ano=${ano}&sigla=${sigla}"
+		//"http://www.camara.gov.br/SitCamaraWS/Proposicoes.asmx/ListarProposicoes?numero=&datApresentacaoIni=&datApresentacaoFim=&autor=&parteNomeAutor=&siglaPartidoAutor=&siglaUFAutor=&generoAutor=&codEstado=&codOrgaoEstado=&emTramitacao=&idTipoAutor=&ano=${ano}&sigla=${sigla}"
 		return 'url_listagem_proposicoes';
 	}
 
 	def atualizar() {
 
-		def tipos = ['PEC']//TipoProposicao.list().collect{it.sigla} //['PL','PEC']
-		def anos = [2011,2013] //Proposicao.PRIMEIRO_ANO..(new Date().calendarDate.year)
+		def tipos = TipoProposicao.list().collect{it.sigla} //['PL','PEC']
+		def anos = []//[2012,2013] //Proposicao.PRIMEIRO_ANO..(new Date().calendarDate.year)
 		
 		l1:for (tipo in tipos) {
 			l2:for (ano in anos) {
@@ -66,8 +67,14 @@ class AtualizarProposicaoService extends AtualizadorEntidade {
 					def anoA = prop.ano?.toString()
 					def desc = "${siglaA} ${numeroA}/${anoA}"
 					
+					def conteudoTotal = prop.apreciacao.txtApreciacao.toString()+" "+prop.txtEmenta.toString()+" "+prop.txtExplicacaoEmenta.toString()+" "+prop.ultimoDespacho.txtDespacho?.toString()
+					if (!PalavrasChaveUtil.isConteudoCandidato(conteudoTotal)) {
+						log.debug("Proposição ${desc} não contém as palavras chaves necessárias")
+						continue l3;
+					}
+					
 					if (situacaoA.toLowerCase().equals("arquivada")) {
-						def tipoPropA =	sicao.findBySigla(siglaA)
+						def tipoPropA =	TipoProposicao.findBySigla(siglaA)
 						Proposicao proposicaoT = Proposicao.findByNumeroAndAnoAndTipoProposicao(numeroA,anoA,tipoPropA)
 						if (proposicaoT) {
 							proposicaoT.delete()
@@ -77,7 +84,7 @@ class AtualizarProposicaoService extends AtualizadorEntidade {
 							continue l3;
 						}
 					}
-					 
+					
 					def idA = prop.id.toString().trim()
 					TipoProposicao tipoP = TipoProposicao.findBySigla(siglaA)
 					
@@ -98,10 +105,11 @@ class AtualizarProposicaoService extends AtualizadorEntidade {
 					
 					if (entidade) { // já existe o registro, atualize os dados
 						entidade.properties=atributos
+						entidade.save()
 						log.debug("Tipo de proposição ${desc} atualizado")
 					} else { // ainda não existe. Persista agora
 						entidade = new Proposicao(atributos)
-						entidade.save()
+						entidade.insert()
 						
 						if (entidade.errors.errorCount>0) {
 							log.error("Proposição ${desc} NÃO foi salva devido a erros: ${entidade.errors}")

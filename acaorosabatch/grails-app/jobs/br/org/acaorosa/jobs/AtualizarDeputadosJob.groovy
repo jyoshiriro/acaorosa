@@ -17,16 +17,17 @@ class AtualizarDeputadosJob {
 	 */
 	 
 	static triggers = {
-		cron name: "atualizarDeputadosJob", cronExpression: "* 30 23 * * ? 2015", startDelay:1000
+		//simple name: 'atualizarDeputadosJob', repeatInterval: 15000l // execute job once in 5 seconds
+		cron name: "atualizarDeputadosJob", cronExpression: "0 0 2 * * ?", startDelay:1000
 	}
 
-	AtualizarDeputadoService atualizarDeputadoService
-	
+	def atualizarDeputadoService
+
 	def concurrent = false
 	
 	def execute() {
 		try {
-			atualizarDeputadoService.atualizar()
+//			atualizarDeputadoService.atualizar()
 			log.debug("Atualização Geral dos registros de Cadastro de Deputados concluída com sucesso")
 		} catch (Exception e) {
 			log.error("Erro ao tentar a Atualização Geral dos registros de Cadastro de Deputados: ${e.message}")

@@ -16,7 +16,7 @@ Atenciosamente,
 <p>&nbsp;</p>
 <i>
 Se não quiser mais receber nossos e-mails, clique 
-<b><a href="http://li806-158.members.linode.com:8080/acaorosa/unsubscribe/${email}">aqui</a></b>
+<b><a href="http://li806-158.members.linode.com:8080/acaorosa/unsubscribe?email=${email}">aqui</a></b>
 ou copie e cole em seu navegador o endereço abaixo: 
 <br/>
 http://li806-158.members.linode.com:8080/acaorosa/unsubscribe/${email} 

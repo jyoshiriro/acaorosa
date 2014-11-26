@@ -125,6 +125,13 @@ log4j.main = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+   environments {
+	   development {
+		   debug  'br.org.acaorosa'
+		   //debug 'org.codahaus.groovy.grails.plugins.seachable'
+		   //debug 'org.compass'
+	   }
+    }
 }
 
 // Added by the Spring Security Core plugin:
@@ -136,6 +143,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/index':                         ['permitAll'],
 	'/index.gsp':                     ['permitAll'],
 	'/assets/**':                     ['permitAll'],
+	'/testar/**':                     ['permitAll'],
 	'/**/js/**':                      ['permitAll'],
 	'/**/css/**':                     ['permitAll'],
 	'/**/images/**':                  ['permitAll'],
