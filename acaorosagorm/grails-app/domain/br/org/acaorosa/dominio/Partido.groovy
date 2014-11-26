@@ -18,6 +18,7 @@ class Partido {
 
 	static mapWith = "mongo"
 	
+	String id
 	String sigla
 	String nome
 	String campoPesquisa

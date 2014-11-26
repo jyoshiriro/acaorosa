@@ -7,4 +7,5 @@ class Parametro {
 	String id
 	String sigla
 	String valor
+	String descricao
 }

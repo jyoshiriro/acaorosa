@@ -16,6 +16,7 @@ class Voto {
 	
 	static mapWith = "mongo"
 	
+	String id
 	Deputado deputado
 	String voto 
 	

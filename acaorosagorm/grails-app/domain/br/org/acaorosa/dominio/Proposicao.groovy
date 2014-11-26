@@ -22,6 +22,7 @@ class Proposicao {
 	// segundo pesquisado no site do congresso e após teste nos web services
 	static final Integer PRIMEIRO_ANO = 1934
 	
+	String id
 	Integer idProposicao
 	Integer numero
 	String ano
@@ -31,7 +32,6 @@ class Proposicao {
 	String txtApreciacao // será truncado em 144 caracteres
 	
 	Deputado autor
-	TipoProposicao tipoProposicao
 	
 	String nomeAutor // em registros antigos não há relação, apenas o nome do autor  // será truncado em 200 caracteres
 
@@ -41,7 +41,11 @@ class Proposicao {
 	
 	Date ultimaVotacao
 	
+	TipoProposicao tipoProposicao
+	
 	String campoPesquisa  
+	
+	Boolean mensagemMontada = false
 
 	static hasMany = [votacoes:Votacao]
 	
@@ -51,11 +55,11 @@ class Proposicao {
 	
 	static constraints = {
 		ano(maxSize:4)
-		txtEmenta(maxSize:256)
-		txtExplicacaoEmenta(maxSize:144)
+		txtEmenta(nullable:true, maxSize:256)
+		txtExplicacaoEmenta(nullable:true, maxSize:144)
 		txtApreciacao(maxSize:144)
 		txtUltimoDespacho(maxSize:144, nullable:true)
-		situacao(maxSize:256) 
+		situacao(nullable:true, maxSize:256) 
 		ultimoDespacho(nullable:true)
 		ultimaVotacao(nullable:true)
 

@@ -7,6 +7,7 @@ class UrlCurta {
 	
 	static mapWith = "mongo"
 	
+	String id
 	String urlLonga
 	String chaveCurta
 	

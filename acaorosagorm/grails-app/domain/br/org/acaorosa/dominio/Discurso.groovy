@@ -19,6 +19,7 @@ class Discurso {
 
 	static mapWith = "mongo"
 	
+	String id
 	String codigo
 	Date data
 	Integer numeroSessao
@@ -30,6 +31,12 @@ class Discurso {
 	String sumario
 	
 	Deputado deputado
+	String nomePartidoDeputadoAntigo // caso o deputado não esteja na base
+	
+	Boolean mensagemMontadaEmail = false
+	Boolean mensagemMontadaFacebook = false
+	Boolean mensagemMontadaTwitter = false
+	Boolean mensagemMontadaMobile = false
 	
 	static transients = ['urlDetalhes']
 	
@@ -38,6 +45,8 @@ class Discurso {
 		cdFaseSessao(maxSize:5)
 		horaInicio(maxSize:8)
 		sumario(maxSize:4096)
+		nomePartidoDeputadoAntigo nullable:true 
+		cdFaseSessao nullable:true 
 	}
 	
 	static mapping = {
@@ -51,9 +60,9 @@ class Discurso {
 // &dtHorarioQuarto=${horario}&sgFaseSessao=${cdFaseSessao}&Data=${data}&txApelido=${nomeParlamentar}
 
 		def texto = Parametro.findBySigla('url_discurso_deputado_dia').valor
-		def valores = [etapa:numeroSessao,nuSessao:codigo,nuQuarto:numeroQuarto,nuOrador:numeroOrador,nuInsercao:numeroInsercao,horario:horaInicio,cdFaseSessao:cdFaseSessao,data:data.format('dd/MM/yyyy'),nomeParlamentar:deputado.nomeParlamentar]
+		def valores = [etapa:numeroSessao,nuSessao:codigo,nuQuarto:numeroQuarto,nuOrador:numeroOrador,nuInsercao:numeroInsercao,horario:horaInicio,data:data.format('dd/MM/yyyy'),nomeParlamentar:"${deputado.nomeParlamentar} - ${deputado.getPartidoCompleto()}".encodeAsURL()]
 		valores.each{
-			it.value=it.value.toString().encodeAsURL()
+			//it.value=it.value.toString().encodeAsURL()
 		} 
 		Writable template = new SimpleTemplateEngine().createTemplate(texto).make(valores)
 		def urllonga = template.toString()

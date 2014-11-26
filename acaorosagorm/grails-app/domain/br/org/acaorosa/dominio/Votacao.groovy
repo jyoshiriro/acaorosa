@@ -16,6 +16,7 @@ class Votacao {
 	
 	static mapWith = "mongo"
 	
+	String id
 	String resumo
 	Date dataHoraVotacao
 	String objVotacao

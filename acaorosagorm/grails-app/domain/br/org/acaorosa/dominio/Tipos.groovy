@@ -7,10 +7,11 @@ class Tipos {
 	String id
 	
 	String tipoNoticia
-	String tipoEnquete
-	String tipoProposicao
-	String tipoVotacao
-	String tipoDiscurso
+	
+	String tipoEnqueteCamara
+	String tipoProposicaoCamara
+	String tipoVotacaoCamara
+	String tipoDiscursoCamara
 	
 	String autorCamara
 	String autorCamaraEmail
