@@ -16,11 +16,12 @@ package br.org.acaorosa.services.atualizacoes
 import groovy.util.logging.Log4j
 import groovy.util.slurpersupport.GPathResult
 import br.org.acaorosa.dominio.Deputado
+import br.org.acaorosa.dominio.Proposicao;
 import br.org.acaorosa.dominio.Votacao
 import br.org.acaorosa.dominio.Voto
 
 @Log4j
-class AtualizarVotacaoService extends AtualizadorEntidade {
+class AtualizarVotacaoCamaraService extends AtualizadorEntidade {
 
 	@Override
 	public String getSiglaDeParametro() {
@@ -33,7 +34,7 @@ class AtualizarVotacaoService extends AtualizadorEntidade {
 	 * A atualização recupera somente votos de Proposições que são acompanhadas por 1 ou mais usuários 
 	 */
 	def atualizar() {
-		def proposicoes = []// TODO: mineirar proposições relacionadas ao tema
+		def proposicoes = Proposicao.list()
 //		def proposicoes = Proposicao.findAllByNumeroInListAndAno([346],2013) // para o TODO acima
 
 		log.debug("Um total de ${proposicoes.size()} terão votos verificados")
@@ -117,9 +118,9 @@ class AtualizarVotacaoService extends AtualizadorEntidade {
 				}
 			}
 			
-			def session = sessionFactory?.currentSession
+			/*def session = sessionFactory?.currentSession
 			session?.transaction?.commit()
-			session?.transaction?.begin()
+			session?.transaction?.begin()*/
 			
 		} // for de proposições
 						

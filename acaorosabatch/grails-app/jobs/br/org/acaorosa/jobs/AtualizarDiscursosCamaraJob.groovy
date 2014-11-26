@@ -11,8 +11,8 @@ class AtualizarDiscursosCamaraJob {
 	def atualizarDiscursoCamaraService
 	
     static triggers = {
-      simple repeatInterval: 550000l // execute job once in 5 seconds
-	  //cron name: "AtualizarDiscursosCamara", cronExpression: "* * 3 * * ?"
+//      simple repeatInterval: 550000l // execute job once in 5 seconds
+	  cron name: "AtualizarDiscursosCamara", cronExpression: "* * 3 * * ?"
     }
 
     def execute() {

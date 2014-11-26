@@ -1,1 +1,1 @@
-Olá, <b>${nomeDest}</b>!
+Discurso na Câmara dos Deputados: ${detalhes[0..77].encodeAsRaw()} ${urlCurta}

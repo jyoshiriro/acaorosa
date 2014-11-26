@@ -1,1 +1,1 @@
-Olá, <b>${nomeDest}</b>!
+Enquete da Câmara dos Deputados: ${titulo.encodeAsRaw()} ${urlCurta}

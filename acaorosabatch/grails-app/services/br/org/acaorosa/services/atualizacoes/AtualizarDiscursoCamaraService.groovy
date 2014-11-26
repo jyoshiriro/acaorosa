@@ -31,7 +31,7 @@ class AtualizarDiscursoCamaraService extends AtualizadorEntidade {
 	
 	@Override
 	public Object atualizar() {
-		Date proximaAtualizacao = new Date()-20//Date.parse('dd/MM/yyyy', '26/09/2013') // new Date()
+		Date proximaAtualizacao = new Date()-1//Date.parse('dd/MM/yyyy', '26/09/2013') // new Date()
 		Date fim = new Date()//Date.parse('dd/MM/yyyy', '26/09/2013') // new Date()
 		
 		String urlT = null
@@ -40,8 +40,8 @@ class AtualizarDiscursoCamaraService extends AtualizadorEntidade {
 		def quant = 0
 		while (!quant) {
 			
-			urlT = "file:///home/yoshiriro/Downloads/ListarDiscursosPlenario.xml"
-//			urlT = getUrlAtualizacao([data1:proximaAtualizacao.format("dd/MM/yyyy"), data2:fim.format("dd/MM/yyyy")])
+//			urlT = "file:///home/yoshiriro/Downloads/ListarDiscursosPlenario.xml"
+			urlT = getUrlAtualizacao([data1:proximaAtualizacao.format("dd/MM/yyyy"), data2:fim.format("dd/MM/yyyy")])
 			try {
 				xmlr = getXML(urlT)
 				quant = xmlr.childNodes()?.size()

@@ -8,7 +8,7 @@ import grails.gsp.PageRenderer
 import groovy.util.logging.Log4j;
 
 @Log4j
-class EnviarEmailsJob extends AbstractJob {
+class EnviarEmailsJob {
 	
 /*
 	cronExpression: "s m h D M W Y"
@@ -22,8 +22,8 @@ class EnviarEmailsJob extends AbstractJob {
 	*/
 	
     static triggers = {
-      cron name: "EnviarEmails", cronExpression: "* 30 5 * * ?"
-	  //simple repeatInterval: 20000l // execute job once in 5 seconds
+//      cron name: "EnviarEmails", cronExpression: "* 30 5 * * ?"
+	  simple repeatInterval: 20000l, startDelay:90000 // execute job once in 5 seconds
     }
 	
     def mailService
@@ -34,7 +34,7 @@ class EnviarEmailsJob extends AbstractJob {
 	
     def execute() {
 		def usuariosEmail = Usuario.where{
-			receberEmail==true && enabled==true
+			receberEmail==true && enabled==true && email!=null
 		}.list()
 		def noticiasNaoPrecessadas = Noticia.findAllByProcessadaEmail(false)
 		for (Noticia noticia in noticiasNaoPrecessadas) {

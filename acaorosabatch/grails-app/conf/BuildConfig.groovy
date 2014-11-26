@@ -55,8 +55,9 @@ grails.project.dependency.resolution = {
         runtime 'mysql:mysql-connector-java:5.1.29'
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
+		compile 'org.apache.httpcomponents:httpclient:4.3.6'
 		compile 'commons-fileupload:commons-fileupload:1.2.2'
-		//build "org.fusesource.jansi:jansi:1.11"
+		compile 'commons-fileupload:commons-fileupload:1.2.2'
     }
 
     plugins {
@@ -64,14 +65,14 @@ grails.project.dependency.resolution = {
         build ":tomcat:7.0.55"
 
         // plugins for the compile step
-        compile ":scaffolding:2.1.2"
-        compile ':cache:1.1.7'
-        compile ":asset-pipeline:1.9.6"
+        //compile ":scaffolding:2.1.2"
+        //compile ':cache:1.1.7'
+        //compile ":asset-pipeline:1.9.6"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.5.5" // or ":hibernate:3.6.10.17"
         runtime ":database-migration:1.4.0"
-        runtime ":jquery:1.11.1"
+        //runtime ":jquery:1.11.1"
 		
 		compile ":mongodb:3.0.1"
 		compile ':quartz:1.0.2'

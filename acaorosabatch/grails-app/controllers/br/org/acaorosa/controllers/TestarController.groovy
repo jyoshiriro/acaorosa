@@ -1,11 +1,20 @@
 package br.org.acaorosa.controllers
 
-import grails.plugin.springsecurity.annotation.Secured;
-import br.org.acaorosa.dominio.Discurso;
-import br.org.acaorosa.dominio.Proposicao;
+import org.springframework.social.facebook.api.Facebook
+import org.springframework.social.facebook.api.impl.FacebookTemplate
+import org.springframework.social.twitter.api.Twitter
+import org.springframework.social.twitter.api.impl.TwitterTemplate
+
+import br.org.acaorosa.dominio.Discurso
+import br.org.acaorosa.dominio.FacebookUser
+import br.org.acaorosa.dominio.Proposicao
+import br.org.acaorosa.dominio.TwitterUser
+import br.org.acaorosa.jobs.EnviarEmailsJob;
 
 class TestarController {
 
+	EnviarEmailsJob enviarEmailsJob
+	
 	def deputados() {
 		String pp = "<table>"
 		Set deps = []
@@ -29,5 +38,26 @@ class TestarController {
 		}
 		pp+="</table>"
 		render pp
+	}
+	
+	def postar() {
+		if (!params.mp) {
+			return
+		}
+		if (params.rede=='face') {
+			FacebookUser usuarioFacebook = FacebookUser.last()
+			Facebook facebook = new FacebookTemplate(usuarioFacebook.accessToken)
+			facebook.feedOperations().updateStatus(params.mp)
+		}
+		if (params.rede=='twitter') {
+			TwitterUser usuarioFacebook = TwitterUser.last()
+			Twitter facebook = new TwitterTemplate(usuarioFacebook.token)
+			facebook.timelineOperations().updateStatus(params.mp)
+		}
+		flash.message="Postagem enviada com sucesso. Veja a timeline"
+	}
+	
+	def enviarEmails() {
+		enviarEmailsJob.execute()
 	}
 }

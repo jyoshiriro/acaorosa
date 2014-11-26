@@ -9,6 +9,7 @@ import br.org.acaorosa.dominio.Deputado
 import br.org.acaorosa.dominio.Discurso
 import br.org.acaorosa.dominio.Noticia;
 import br.org.acaorosa.dominio.Parametro;
+import br.org.acaorosa.dominio.Proposicao;
 import br.org.acaorosa.dominio.Tipos;
 
 class MontarMensagensService {
@@ -45,6 +46,19 @@ class MontarMensagensService {
 			noticia.autor=discurso.nomePartidoDeputadoAntigo
 		}
 	}
+	
+	public inserirDadosDeputado(Noticia noticia, Proposicao proposicao) {
+		if (proposicao?.autor) {
+			noticia.autor = proposicao.autor.nomePartidoCompleto
+			noticia.autorEmail = proposicao.autor.email
+			noticia.autorFacebook = proposicao.autor.perfilFacebook
+			noticia.autorTwitter = proposicao.autor.perfilTwitter
+			noticia.autorTelefones = proposicao.autor.telefones
+			noticia.autorSite = proposicao.autor.getUrlDetalhes()
+		} else {
+			noticia.autor=proposicao.nomeAutor
+		}
+	}
 
 	/**
 	 * @param tipoConteudo enqueteCamara, proposicaoCamara, votacaoCamara, discursoCamara, noticiaCNJ
@@ -66,8 +80,8 @@ class MontarMensagensService {
 	 */
 	public void preencherConteudos(String tipoConteudo, Noticia noticia) {
 		noticia.conteudoEmail=getConteudo(tipoConteudo, "email", noticia.properties)
-		//		noticia.conteudoFacebook=getConteudo(tipoConteudo, "facebook", noticia.properties)
-		//		noticia.conteudoTwitter=getConteudo(tipoConteudo, "twitter", noticia.properties)
+		noticia.conteudoFacebook=getConteudo(tipoConteudo, "facebook", noticia.properties)
+		noticia.conteudoTwitter=getConteudo(tipoConteudo, "twitter", noticia.properties)
 		//		noticia.conteudoMobile=getConteudo(tipoConteudo, "mobile", noticia.properties)
 	}
 
