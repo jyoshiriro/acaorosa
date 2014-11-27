@@ -61,7 +61,7 @@ grails {
 		host = "smtp.gmail.com"
 		port = 465
 		username = "acaorosa"
-		password = "123acaorosa321"
+		password = "ormmy"
 		props = ["mail.smtp.auth":"true",
 				 "mail.smtp.socketFactory.port":"465",
 				 "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
@@ -142,7 +142,9 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/js/**':                      ['permitAll'],
 	'/**/css/**':                     ['permitAll'],
 	'/**/images/**':                  ['permitAll'],
-	'/**/favicon.ico':                ['permitAll']
+	'/**/favicon.ico':                ['permitAll'],
+	"/j_spring_twitter_security_check":	['permitAll'],
+	"/twitterAuth/popup":	['permitAll']
 ]
 
 grails.plugin.springsecurity.facebook.domain.classname='br.org.acaorosa.dominio.FacebookUser'
