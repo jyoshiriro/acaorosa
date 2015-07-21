@@ -1,0 +1,23 @@
+function calcm(nx, ny) {
+  return (nx+ny)/2;
+}
+
+function calcres(n, target) {
+  if (n == 10) {
+    return "perfect!";
+  } else {
+    if (n >= target) {
+      return "well done!";
+    } else {
+      return "better luck next time";
+    } 
+  }
+}
+
+var na = 10;
+var nb = 3;
+var n_target = 7;
+
+var n_avg = calcm(na,nb);
+var result = calcres(n_avg, n_target);
+console.log(result);
